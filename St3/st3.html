@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOP</title>
+    <link rel="stylesheet" href="st3.css">
+    <script src="https://kit.fontawesome.com/1170424b36.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <navbar>
+        <div class="logo">SHOP</div>
+        <div class="search">
+            <input type="text" placeholder="Search..." class="bar">
+            <span class="fa fa-search"></span>
+            
+            <a href="cart.html" target="_blank"><span class="fa-solid fa-cart-shopping" id="c"></span></a>
+            <!-- <button id="btn">Search</button> -->
+        </div>     
+    </navbar>
+    <!-- <div id="i"> -->
+        <ul id="it">
+
+        </ul>
+    <!-- </div> -->
+
+    <div id="cards">
+        
+    </div>
+
+    <script>
+        // addToCart(item){
+
+        // }
+        let allproducts = []
+
+        const products = fetch("https://dummyjson.com/products")
+        .then(response => response.json())
+
+        var result;
+        products
+        .then(x => {
+            console.log('the promise has settled', x)
+            result = x.products;
+            allproducts = x.products
+            let list = document.getElementById("it");
+            allproducts.map(p=>{
+                let li = document.createElement("li");
+                li.classList.add('list-item');
+                // li.class = 'list-item';
+                // li.innerHTML = `
+                // <img src = "${p.images[0]}"></img>
+                // `
+                li.innerText = p.title;
+                list.appendChild(li);
+            })
+            const cards = document.getElementById("cards");
+            result.map(p=>{
+                const div = document.createElement("div");
+                div.innerHTML = `
+                <div class="card" >
+                <h1 class="title" >${p.title}</h1>
+                <img class="image" src="${p.images[0]}" ></img>
+                
+                <p  class="category">${p.category}</p>
+                <p class="price">$ ${p.price}</p>
+                <p class="fa-solid fa-cart-shopping" id="cart" onclick="addToCart(${p.id})"> Add To Cart</p>
+                </div>
+                `;
+                
+                cards.appendChild(div);
+            })
+            console.log(result[0],result[1]);
+        })
+        .catch(console.error)
+
+        document.querySelector('.bar').addEventListener('input',filterList);
+
+        function filterList(){
+            document.getElementById('it').style.visibility = 'visible';
+            // document.getElementsByTagName('li').style.zIndex = "3";
+            // document.getElementById('cards').style.zIndex = '-1';
+            const searchInput = document.querySelector('.bar');
+            console.log(searchInput.value);
+            if(searchInput.value == ""){
+                console.log("empty")
+                document.getElementById('it').style.visibility = 'hidden';
+            }
+            const filter = searchInput.value.toLowerCase();
+            
+            const listItem = document.querySelectorAll('.list-item');
+            // console.log(listItem)
+
+            listItem.forEach((item)=>{
+                let text = item.textContent;
+                // console.log(text);
+                if(text.toLowerCase().includes(filter.toLowerCase())){
+                    item.style.display = '';
+                }else{
+                    item.style.display = 'none';
+                }
+            });
+            
+        }       
+
+        fetch("https://dummyjson.com/products")
+        .then(function(response){
+            return response.json();
+        })
+
+        .then(function(data){
+            localStorage.setItem("products",JSON.stringify(data.products));
+            if(!localStorage.getItem("cart")){
+                localStorage.setItem("cart","[]");
+            }
+        })
+
+        let pro = JSON.parse(localStorage.getItem("products"));
+        let cart = JSON.parse(localStorage.getItem("cart"));
+        console.log(pro);
+        // cart = [];
+        var i = 0;
+        function addToCart(productId){
+            console.log(cart);
+            console.log(productId)
+            let prod = pro.find(function(prod){
+                
+                return prod.id == productId;
+            })
+            console.log(prod);
+
+            if(cart.length == 0){
+                cart.push(prod);
+                i += 1;
+            }else{
+                let res = cart.find(element => element.id == productId);
+                if(res == undefined){
+                    cart.push(prod);
+                    i += 1;
+                }
+            }
+            console.log(cart)
+            localStorage.setItem("cart",JSON.stringify(cart));
+            // window.location.reload()
+
+        }
+        
+
+        // addToCart(1);
+        // addToCart(2);
+    </script>
+    <!-- <script src="cart.js"></script> -->
+</body>
+</html>
