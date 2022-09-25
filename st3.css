@@ -1,0 +1,135 @@
+ *{
+    padding: 0;
+    margin: 0;
+ }
+
+ navbar{
+    color: pink;
+    display: flex;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background-color: gray;
+ }
+ ul{
+   z-index: 1;
+ }
+
+ .logo{
+    font-size: 35px;
+    cursor: pointer;
+    /* color: #000; */
+    font-weight: 800;
+ }
+
+ .search{
+    display: flex;
+    margin-right: 80px;
+    height: 35px;
+    line-height: 35px; 
+ }
+
+ .search input{
+    /* border-radius: 20px; */
+    border: none;
+    outline: none; 
+    width: 350px;
+    font-size: 20px;
+    padding: 10px;
+    /* height: 100%; */
+ }
+
+ .search span{
+    color: black;
+    cursor: pointer;
+    font-size: 20px;
+    background: wheat;
+    position: relative;
+    /* height: 100%; */
+    padding: 8px;
+    z-index: 1;
+    transition: transform 1s;
+ }
+
+ .search span:hover{
+    transform: rotate(360deg);
+ }
+
+ #c{
+   margin-left: 20px;
+ }
+
+ #cards{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+ }
+
+ .card{
+    width: 200px;
+    height: 300px;
+    box-shadow: 0 0 4px 3px black;
+    background-color: rgb(187, 185, 185);
+    text-align: center;
+    padding: 40px;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: 1s;
+    /* overflow: hidden; */
+ }
+
+ .card:hover{
+   transform: scale(1.1)
+ }
+
+ .title{
+    font-size: 25px;
+ }
+
+ .category, .price{
+    font-weight: bold;
+    text-transform: capitalize;
+    margin: 10px;
+    font-size: 20px;
+ }
+
+ .image{
+    width: 75%;
+    height: 50%;
+ }
+
+ #cart{
+   cursor: pointer;
+   /* margin-top: 20px; */
+   transition: 0.5s;
+ }
+
+ #cart:hover{
+   font-size: 110%;
+   color: blue;
+ }
+
+ #it{
+   /* background-color: blueviolet; */
+   margin-left: 62%;
+   visibility: hidden;
+   /* float: right; */
+   /* margin-right: 400px; */
+   /* height: 50px; */
+   list-style: none;
+   padding: 2px;
+   position: absolute;
+   background-color: white;
+ }
+
+ li{
+   margin: 2px;
+   padding: 4px;
+   width: 350px;
+   font-weight: bold;
+   font-size: medium;
+ }
+

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./cart.css">
+    <script src="https://kit.fontawesome.com/1170424b36.js" crossorigin="anonymous"></script>
+    <title>Cart</title>
+</head>
+<body>
+    <navbar>
+        <div class="logo">SHOP</div>
+        <div class="search">
+            <input type="text" placeholder="Search..." class="bar">
+            <span class="fa fa-search"></span>
+            
+            <a href="cart.html" target="_blank"><span class="fa-solid fa-cart-shopping" id="c"></span></a>
+            <!-- <button id="btn">Search</button> -->
+        </div>     
+    </navbar>
+    <div id="cards">
+
+    </div>
+    <div  id="pr">
+        
+    </div>
+    <!-- <span id = "total">Total: </span> -->
+    
+    <script>
+        var price = 0;
+        let c = localStorage.getItem("cart");
+        if(c){
+            price += c.price;
+            const cart = JSON.parse(c);
+            // console.log(cart)
+            var pr = 0;
+            cart.map(p=>{
+                pr += p.price;
+                console.log(pr);
+                const cards = document.getElementById("cards");
+                const div = document.createElement("div");
+                div.innerHTML = `
+                <div class="card" >
+                <h1 class="title" >${p.title}</h1>
+                <img class="image" src="${p.images[0]}" ></img>
+                
+                
+                <p class="price">$ ${p.price}</p>
+                <button type="button" onclick="removeItemFromCart(${p.id})">Delet Item</button>
+                </div>
+                `;
+                
+                cards.appendChild(div);
+                
+            }) 
+            
+        }
+
+        // if(cart == null){
+        //     document.getElementById('pr').style.visibility = "hidden";
+        // }
+        
+        document.getElementById('pr').innerHTML = "Total: " + pr + "$";
+        
+
+        let cart = JSON.parse(localStorage.getItem("cart"));
+        
+        function removeItemFromCart(productId){
+                console.log(productId)
+                let temp = cart.filter(item => item.id != productId);
+                localStorage.setItem("cart",JSON.stringify(temp));
+            
+                console.log(cart)
+                window.location.reload()
+                
+        }
+        // window.onload = function(){
+        //     document.getElementsByClassName("pr").innerHTML=pr;
+        // }
+        // document.getElementsByClassName("pr").innerHTML = "hdhdh";
+
+    </script>
+</body>
+</html>
